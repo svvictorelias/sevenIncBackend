@@ -1,0 +1,20 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model employee {
+  id         String   @id @default(uuid())
+  name       String   @db.VarChar(70)
+  document   String   @db.VarChar(14)
+  email      String   @db.VarChar(50)
+  phone      String   @db.VarChar(11)
+  birth_date DateTime @db.Date()
+  salary     Float    @db.DoublePrecision()
+  created_at DateTime @default(now())
+}

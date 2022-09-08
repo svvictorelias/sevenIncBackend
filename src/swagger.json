@@ -1,0 +1,238 @@
+{
+  "openapi":"3.0.0",
+  "info":{
+    "title":"Seven Test Documentation",
+    "description":"This is an API to manager the User's API",
+    "version":"1.0.0",
+    "contact":{
+      "email":"svvictorelias@gmail.com"
+      }
+    },
+    "paths":{
+      "/employee":{
+        "get":{
+          "tags":["Employees"],
+          "summary":"List all Employees",
+          "description":"List Employees with all informations",
+          "responses":{
+            "200":{
+              "description":"Sucess",
+              "content":{
+                "application/json":{
+                  "schema":{
+                    "type":"array",
+                    "items":{
+                      "type":"object",
+                      "properties":{
+                        "id":{
+                          "type":"string"
+                        },
+                        "name":{
+                          "type":"string"
+                        },
+                        "document":{
+                          "type":"string"
+                        },
+                        "email":{
+                          "type":"string"
+                        },
+                        "phone":{
+                          "type":"string"
+                        },
+                        "birth_date":{
+                          "type":"string",
+                          "format":"date-time"
+                        },
+                        "salary":{
+                          "type":"number",
+                          "format":"double"
+                        },
+                        "created_at":{
+                          "type":"string",
+                          "format":"date-time"
+                        }
+                        
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500":{"description":"Internal Server Error"}
+          }
+        },
+        "post":{
+          "tags":["Employees"],
+          "summary":"Create a new employee",
+          "description":"Create a new employee in the Database",
+          "requestBody":{
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "properties":{
+                    "name":{
+                      "type":"string"
+                    },
+                    "document":{
+                      "type":"string"
+                    },
+                    "email":{
+                      "type":"string"
+                    },
+                    "phone":{
+                      "type":"string"
+                    },
+                    "birth_date":{
+                      "type":"string"
+                    },
+                    "salary":{
+                      "type":"number",
+                      "format":"double"
+                    }
+                  }
+                },
+                  "example":{
+                    "name":"Victor Elias",
+	                  "document":"13526547896",
+	                  "email":"svvictorelias@gmail.com",
+                    "phone":"31982914857",
+                    "birth_date":"1998-11-11",
+                    "salary":7550.50
+                  }
+              }
+            }
+          },
+          "responses":{
+            "201":{
+              "description":"Created"
+            },
+            "500":{
+              "description":"Internal Server Error"
+            },
+            "401":{
+              "description":"Document Already Exists"
+            }
+          }
+        }
+      },
+      "/employee/{id}":{
+        "get":{
+          "tags":["Employees"],
+          "summary":"Update a employee",
+          "description":"Show one employee by id",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "employee id",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"Sucess"
+            },
+            "500":{
+              "description":"Internal server error"
+            },
+            "404":{
+              "description":"Employee not found"
+            }
+          }
+        },
+        "put":{
+          "tags":["Employees"],
+          "summary":"Update a employee",
+          "description":"Update a exists employee",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "employee id",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody":{
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "properties":{
+                    "name":{
+                      "type":"string"
+                    },
+                    "document":{
+                      "type":"string"
+                    },
+                    "email":{
+                      "type":"string"
+                    },
+                    "phone":{
+                      "type":"string"
+                    },
+                    "birth_date":{
+                      "type":"string"
+                    },
+                    "salary":{
+                      "type":"number",
+                      "format":"double"
+                    }
+                  }
+                },
+                  "example":{
+                    "name":"Victor Elias",
+	                  "document":"13526547896",
+	                  "email":"svvictorelias@gmail.com",
+                    "phone":"31982914857",
+                    "birth_date":"1998-11-11",
+                    "salary":7550.50
+                  }
+              }
+            }
+          },
+          "responses":{
+            "200":{
+              "description":"Updated"
+            },
+            "500":{
+              "description":"Internal Server Error"
+            },
+            "404":{
+              "description":"Employee not found"
+            }
+          }
+        },
+        "delete":{
+          "tags":["Employees"],
+          "summary":"Delete a employee",
+          "description":" If exists, delete a employee",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "employee id",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Deleted"
+            },
+            "404":{
+              "description":"Employee not found"
+            }
+          }
+        }
+      }
+    }
+}
